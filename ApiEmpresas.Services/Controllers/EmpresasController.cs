@@ -23,5 +23,21 @@ namespace ApiEmpresas.Services.Controllers
             };
             return StatusCode(201, response);
         }
+
+        [HttpPut]
+        public IActionResult Put(EmpresaPutRequest request)
+        {
+            var response = new EmpresaResponse
+            {
+                Id = request.IdEmpresa,
+                NomeFantasia = request.NomeFantasia,
+                RazaoSocial = request.RazaoSocial,
+                Cnpj = request.Cnpj,
+                DataInclusao = DateTime.Now,
+                DataUltimaAlteracao = DateTime.Now,
+            };
+            return StatusCode(200, response);
+        }
+
     }
 }
