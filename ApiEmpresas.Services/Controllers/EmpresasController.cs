@@ -21,6 +21,7 @@ namespace ApiEmpresas.Services.Controllers
                 DataInclusao = DateTime.Now,
                 DataUltimaAlteracao = DateTime.Now,
             };
+
             return StatusCode(201, response);
         }
 
@@ -36,8 +37,67 @@ namespace ApiEmpresas.Services.Controllers
                 DataInclusao = DateTime.Now,
                 DataUltimaAlteracao = DateTime.Now,
             };
+
             return StatusCode(200, response);
         }
 
+        [HttpDelete("{idEmpresa}")]
+        public IActionResult Delete(Guid idEmpresa)
+        {
+            var response = new EmpresaResponse
+            {
+                Id = idEmpresa,
+                NomeFantasia = "Empresa Teste",
+                RazaoSocial = "Empresa Teste LTDA",
+                Cnpj = "44.424.467/0001-34",
+                DataInclusao = DateTime.Now,
+                DataUltimaAlteracao = DateTime.Now
+            };
+
+            return StatusCode(200, response);
+        }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var lista = new List<EmpresaResponse>();
+            lista.Add(new EmpresaResponse
+            {
+                Id = Guid.NewGuid(),
+                NomeFantasia = "Empresa Teste 01",
+                RazaoSocial = "Empresa Teste 01 LTDA",
+                Cnpj = "44.424.467/0001-34",
+                DataInclusao = DateTime.Now,
+                DataUltimaAlteracao = DateTime.Now,
+            });
+
+            lista.Add(new EmpresaResponse
+            {
+                Id = Guid.NewGuid(),
+                NomeFantasia = "Empresa Teste 02",
+                RazaoSocial = "Empresa Teste 02 LTDA",
+                Cnpj = "70.614.891/0001-51",
+                DataInclusao = DateTime.Now,
+                DataUltimaAlteracao = DateTime.Now,
+            });
+
+            return StatusCode(200, lista);
+        }
+
+        [HttpGet("{idEmpresa}")]
+        public IActionResult GetById(Guid idEmpresa)
+        {
+            var response = new EmpresaResponse
+            {
+                Id = Guid.NewGuid(),
+                NomeFantasia = "Empresa Teste",
+                RazaoSocial = "Empresa Teste LTDA",
+                Cnpj = "44.424.467/0001-34",
+                DataInclusao = DateTime.Now,
+                DataUltimaAlteracao = DateTime.Now,
+            };
+
+            return StatusCode(200, response);
+        }
     }
 }
