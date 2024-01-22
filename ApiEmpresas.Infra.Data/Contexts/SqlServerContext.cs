@@ -24,10 +24,12 @@ namespace ApiEmpresas.Infra.Data.Contexts
             //informar cada classe de mapeamento do projeto
             modelBuilder.ApplyConfiguration(new EmpresaMap());
             modelBuilder.ApplyConfiguration(new FuncionarioMap());
+            modelBuilder.ApplyConfiguration(new UsuarioMap());
         }
 
         //declarar uma propriedade DbSet para cada entidade
         public DbSet<Empresa> Empresa {  get; set; }
         public DbSet<Funcionario> Funcionario { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
     }
 }
