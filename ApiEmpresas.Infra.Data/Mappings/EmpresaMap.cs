@@ -41,6 +41,14 @@ namespace ApiEmpresas.Infra.Data.Mappings
                 .HasColumnName("CNPJ")
                 .HasMaxLength(20)
                 .IsRequired();
+
+            #region
+
+            builder.HasIndex(e => e.Cnpj)
+                .IsUnique();
+
+            #endregion
+
         }
     }
 }

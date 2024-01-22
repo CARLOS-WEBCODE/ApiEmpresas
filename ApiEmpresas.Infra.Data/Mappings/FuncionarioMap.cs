@@ -49,6 +49,25 @@ namespace ApiEmpresas.Infra.Data.Mappings
             builder.Property(f => f.IdEmpresa)
                 .HasColumnName("IDEMPRESA")
                 .IsRequired();
+
+            #region Mapeamento de relacionamento 1 para muitos
+
+            builder.HasOne(f => f.Empresa)  //Funcionario TEM 1 Empresa
+                .WithMany(e => e.Funcionarios)  //Empresa TEM MUITOS Funcionarios
+                .HasForeignKey(f => f.IdEmpresa) //Chave estrangeira
+                .HasForeignKey(f => f.IdEmpresa); //Chave estrangeira
+
+            #endregion
+
+            #region Mapeamento de campos únicos
+
+            builder.HasIndex(f => f.Cpf)
+                .IsUnique();
+
+            builder.HasIndex(f => f.Matricula)
+                .IsUnique();
+
+            #endregion
         }
     }
 }
