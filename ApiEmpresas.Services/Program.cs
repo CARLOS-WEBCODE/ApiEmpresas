@@ -8,6 +8,9 @@ builder.Services.AddControllers();
 //Adicionando a configuração do Swagger
 SwaggerConfiguration.AddSwagger(builder);
 
+//Adicionando a configuração do EntityFramework
+EntityFrameworkConfiguration.AddEntityFramework(builder);
+
 // Add services to the container.
 var app = builder.Build();
 

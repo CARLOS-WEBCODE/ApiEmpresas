@@ -1,4 +1,6 @@
-﻿using ApiEmpresas.Services.Requests;
+﻿using ApiEmpresas.Infra.Data.Entities;
+using ApiEmpresas.Infra.Data.Interfaces;
+using ApiEmpresas.Services.Requests;
 using ApiEmpresas.Services.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,20 +11,60 @@ namespace ApiEmpresas.Services.Controllers
     [ApiController]
     public class EmpresasController : ControllerBase
     {
+
+        //atributo
+        private readonly IUnitOfWork _unitOfWork;
+        //construtor para injeção de dependência
+        public EmpresasController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
         [HttpPost]
         public IActionResult Post(EmpresaPostRequest request)
         {
-            var response = new EmpresaResponse
+            try
             {
-                Id = Guid.NewGuid(),
-                NomeFantasia = request.NomeFantasia,
-                RazaoSocial = request.RazaoSocial,
-                Cnpj = request.Cnpj,
-                DataInclusao = DateTime.Now,
-                DataUltimaAlteracao = DateTime.Now,
-            };
+                //verificar se o CNPJ informado já está cadastrado..
+                if (_unitOfWork.EmpresaRepository.ObterPorCnpj
+               (request.Cnpj) != null)
 
-            return StatusCode(201, response);
+                    //HTTP 422 -> UNPROCESSABLE ENTITY
+                   return StatusCode(422,
+                   new
+                   {
+                       message = "O CNPJ informado já está cadastrado." 
+                   
+                   });
+                   
+                    var empresa = new Empresa
+                    {
+                        IdEmpresa = Guid.NewGuid(),
+                        NomeFantasia = request.NomeFantasia,
+                        RazaoSocial = request.RazaoSocial,
+                        Cnpj = request.Cnpj,
+                    };
+
+                //gravar no banco de dados
+                _unitOfWork.EmpresaRepository.Inserir(empresa);
+
+                var response = new EmpresaResponse
+                {
+                    Id = empresa.IdEmpresa,
+                    NomeFantasia = empresa.NomeFantasia,
+                    RazaoSocial = empresa.RazaoSocial,
+                    Cnpj = empresa.Cnpj
+                };
+
+                //HTTP 201 -> SUCCESS CREATED
+                return StatusCode(201, response);
+            }
+            catch (Exception e)
+            {
+                //retornando status e mensagem de erro
+                //HTTP 500 -> ERRO INTERNO DE SERVIDOR
+                return StatusCode(500, e.Message);
+            }
         }
 
         [HttpPut]
