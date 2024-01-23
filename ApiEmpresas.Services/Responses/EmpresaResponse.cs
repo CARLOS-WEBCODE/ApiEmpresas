@@ -9,7 +9,6 @@
         public string? NomeFantasia { get; set; }
         public string? RazaoSocial { get; set; }
         public string? Cnpj { get; set; }
-        public DateTime DataInclusao { get; set; }
-        public DateTime DataUltimaAlteracao { get; set; }
+
     }
 }
