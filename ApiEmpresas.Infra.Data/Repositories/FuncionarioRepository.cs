@@ -1,5 +1,7 @@
-﻿using ApiEmpresas.Infra.Data.Entities;
+﻿using ApiEmpresas.Infra.Data.Contexts;
+using ApiEmpresas.Infra.Data.Entities;
 using ApiEmpresas.Infra.Data.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,45 +12,65 @@ namespace ApiEmpresas.Infra.Data.Repositories
 {
     public class FuncionarioRepository : IFuncionarioRepository
     {
+        //atributo
+        private readonly SqlServerContext _context;
+
+        //construtor para injeção de dependência
+        public FuncionarioRepository(SqlServerContext context)
+        {
+            _context = context;
+        }
 
         public void Inserir(Funcionario entity)
         {
-            throw new NotImplementedException();
+            _context.Entry(entity).State = EntityState.Added;
+            _context.SaveChanges();
         }
 
         public void Alterar(Funcionario entity)
         {
-            throw new NotImplementedException();
+            _context.Entry(entity).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
         public void Excluir(Funcionario entity)
         {
-            throw new NotImplementedException();
+            _context.Entry(entity).State = EntityState.Deleted;
+            _context.SaveChanges();
         }
 
         public List<Funcionario> Consultar()
         {
-            throw new NotImplementedException();
-        }
-
-        public Funcionario ObterPorCpf(string cpf)
-        {
-            throw new NotImplementedException();
+            return _context.Funcionario
+                .OrderBy(f => f.Nome)
+                .ToList();
         }
 
         public Funcionario ObterPorId(Guid id)
         {
-            throw new NotImplementedException();
+            return _context.Funcionario
+                .FirstOrDefault(f => f.IdFuncionario.Equals(id));
         }
+
+        public Funcionario ObterPorCpf(string cpf)
+        {
+            return _context.Funcionario
+                .FirstOrDefault(f => f.Cpf.Equals(cpf));
+        }
+
 
         public Funcionario ObterPorMatricula(string matricula)
         {
-            throw new NotImplementedException();
+            return _context.Funcionario
+                .FirstOrDefault(f => f.Matricula.Equals(matricula));
         }
 
         public List<Funcionario> ObterPorNome(string nome)
         {
-            throw new NotImplementedException();
+            return _context.Funcionario
+                .Where(f => f.Nome.Contains(nome))
+                .OrderBy(f => f.Nome)
+                .ToList();
         }
     }
 }
