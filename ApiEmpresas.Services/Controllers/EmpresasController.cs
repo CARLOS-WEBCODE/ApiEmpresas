@@ -4,6 +4,7 @@ using ApiEmpresas.Services.Requests;
 using ApiEmpresas.Services.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Win32;
 
 namespace ApiEmpresas.Services.Controllers
 {
@@ -70,76 +71,150 @@ namespace ApiEmpresas.Services.Controllers
         [HttpPut]
         public IActionResult Put(EmpresaPutRequest request)
         {
-            var response = new EmpresaResponse
+            try
             {
-                Id = request.IdEmpresa,
-                NomeFantasia = request.NomeFantasia,
-                RazaoSocial = request.RazaoSocial,
-                Cnpj = request.Cnpj,
-                DataInclusao = DateTime.Now,
-                DataUltimaAlteracao = DateTime.Now,
-            };
+                //pesquisando a empresa atraves do id..
+                var empresa = _unitOfWork.EmpresaRepository
+               .ObterPorId(request.IdEmpresa);
 
-            return StatusCode(200, response);
+                //verificando se a empresa não foi encontrada
+                if (empresa == null)
+                    //HTTP 422 -> UNPROCESSABLE ENTITY
+                    return StatusCode(422, new
+                    {
+                        message = "Empresa não encontrada, verifique o ID informado." });
+
+                    //verificando se o cnpj informado ja está cadastrado para outra empresa
+                var registro = _unitOfWork.EmpresaRepository.ObterPorCnpj(request.Cnpj);
+                if (registro != null && registro.IdEmpresa
+                != empresa.IdEmpresa)
+
+                    //HTTP 422 -> UNPROCESSABLE ENTITY
+                    return StatusCode(422, new
+                    {
+                        message = "O CNPJ informado já está cadastrado para outra empresa." });
+                     //atualizando os dados da empresa
+                empresa.NomeFantasia = request.NomeFantasia;
+                empresa.RazaoSocial = request.RazaoSocial;
+                empresa.Cnpj = request.Cnpj;
+                _unitOfWork.EmpresaRepository.Alterar(empresa);
+                var response = new EmpresaResponse
+                {
+                    Id = empresa.IdEmpresa,
+                    NomeFantasia = empresa.NomeFantasia,
+                    RazaoSocial = empresa.RazaoSocial,
+                    Cnpj = empresa.Cnpj
+                };
+
+                return StatusCode(200, response);
+            }
+            catch (Exception e)
+            {
+                //retornando status e mensagem de erro
+                //HTTP 500 -> ERRO INTERNO DE SERVIDOR
+                return StatusCode(500, e.Message);
+            }
         }
 
         [HttpDelete("{idEmpresa}")]
         public IActionResult Delete(Guid idEmpresa)
         {
-            var response = new EmpresaResponse
+            try
             {
-                Id = idEmpresa,
-                NomeFantasia = "Empresa Teste",
-                RazaoSocial = "Empresa Teste LTDA",
-                Cnpj = "44.424.467/0001-34",
-                DataInclusao = DateTime.Now,
-                DataUltimaAlteracao = DateTime.Now
-            };
+                //pesquisando a empresa atraves do id..
+                var empresa = _unitOfWork.EmpresaRepository.ObterPorId(idEmpresa);
 
-            return StatusCode(200, response);
+                //verificando se a empresa não foi encontrada
+                if (empresa == null)
+                    //HTTP 422 -> UNPROCESSABLE ENTITY
+                    return StatusCode(422, new
+                    {
+                        message = "Empresa não encontrada, verifique o ID informado." });
+
+                //excluindo a empresa
+                _unitOfWork.EmpresaRepository.Excluir(empresa);
+
+                var response = new EmpresaResponse
+                {
+                    Id = empresa.IdEmpresa,
+                    NomeFantasia = empresa.NomeFantasia,
+                    RazaoSocial = empresa.RazaoSocial,
+                    Cnpj = empresa.Cnpj
+                };
+
+                return StatusCode(200, response);
+            }
+            catch (Exception e)
+            {
+                //retornando status e mensagem de erro
+                //HTTP 500 -> ERRO INTERNO DE SERVIDOR
+                return StatusCode(500, e.Message);
+            }
         }
 
         [HttpGet]
         public IActionResult GetAll()
         {
-            var lista = new List<EmpresaResponse>();
-            lista.Add(new EmpresaResponse
+            try
             {
-                Id = Guid.NewGuid(),
-                NomeFantasia = "Empresa Teste 01",
-                RazaoSocial = "Empresa Teste 01 LTDA",
-                Cnpj = "44.424.467/0001-34",
-                DataInclusao = DateTime.Now,
-                DataUltimaAlteracao = DateTime.Now,
-            });
+                var lista = new List<EmpresaResponse>();
 
-            lista.Add(new EmpresaResponse
+                //consultar as empresas no repositorio
+                foreach (var item in _unitOfWork.EmpresaRepository.Consultar())
+                {
+                    lista.Add(new EmpresaResponse
+                    {
+                        Id = item.IdEmpresa,
+                        NomeFantasia = item.NomeFantasia,
+                        RazaoSocial = item.RazaoSocial,
+                        Cnpj = item.Cnpj
+                    });
+                }
+                if (lista.Count > 0)
+                    return StatusCode(200, lista);
+                else
+                    return StatusCode(204);
+            }
+            catch (Exception e)
             {
-                Id = Guid.NewGuid(),
-                NomeFantasia = "Empresa Teste 02",
-                RazaoSocial = "Empresa Teste 02 LTDA",
-                Cnpj = "70.614.891/0001-51",
-                DataInclusao = DateTime.Now,
-                DataUltimaAlteracao = DateTime.Now,
-            });
-
-            return StatusCode(200, lista);
+                //retornando status e mensagem de erro
+                //HTTP 500 -> ERRO INTERNO DE SERVIDOR
+                return StatusCode(500, e.Message);
+            }
         }
 
         [HttpGet("{idEmpresa}")]
         public IActionResult GetById(Guid idEmpresa)
         {
-            var response = new EmpresaResponse
+            try
             {
-                Id = Guid.NewGuid(),
-                NomeFantasia = "Empresa Teste",
-                RazaoSocial = "Empresa Teste LTDA",
-                Cnpj = "44.424.467/0001-34",
-                DataInclusao = DateTime.Now,
-                DataUltimaAlteracao = DateTime.Now,
-            };
+                //buscar a empresa no repositorio atraves do id
+                var empresa = _unitOfWork.EmpresaRepository.ObterPorId(idEmpresa);
 
-            return StatusCode(200, response);
+                //verificar se a empresa foi encontrada
+                if (empresa != null)
+                {
+                    var response = new EmpresaResponse
+                    {
+                        Id = empresa.IdEmpresa,
+                        NomeFantasia = empresa.NomeFantasia,
+                        RazaoSocial = empresa.RazaoSocial,
+                        Cnpj = empresa.Cnpj
+                    };
+                    return StatusCode(200, response);
+                }
+                else
+                {
+                    return StatusCode(204);
+                }
+            }
+
+            catch (Exception e)
+            {
+                //retornando status e mensagem de erro
+                //HTTP 500 -> ERRO INTERNO DE SERVIDOR
+                return StatusCode(500, e.Message);
+            }
         }
     }
 }
