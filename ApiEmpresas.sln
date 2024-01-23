@@ -9,7 +9,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Services Layer", "1 - S
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - InfraStructure Layer", "2 - InfraStructure Layer", "{02852239-7010-4681-AD19-AC2205D54CCA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiEmpresas.Infra.Data", "ApiEmpresas.Infra.Data\ApiEmpresas.Infra.Data.csproj", "{40146A97-90E1-46E5-B782-4700D1E96C24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiEmpresas.Infra.Data", "ApiEmpresas.Infra.Data\ApiEmpresas.Infra.Data.csproj", "{40146A97-90E1-46E5-B782-4700D1E96C24}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4FE8650F-AC9F-4B9E-9E3E-4CE70CD24EDB}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
