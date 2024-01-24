@@ -1,5 +1,4 @@
-﻿using ApiEmpresas.Infra.Data.Entities;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ApiEmpresas.Services.Requests
 {
@@ -8,9 +7,6 @@ namespace ApiEmpresas.Services.Requests
     /// </summary>
     public class FuncionarioPostRequest
     {
-        [Required(ErrorMessage = "Por favor, informe o id do funcionário.")]
-        public Guid IdFuncionario { get; set; }
-
         [Required(ErrorMessage = "Por favor, informe o nome do funcionário.")]
         public string Nome { get; set; }
 
@@ -27,4 +23,4 @@ namespace ApiEmpresas.Services.Requests
         public Guid IdEmpresa { get; set; }
 
     }
-}
+}
