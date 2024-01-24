@@ -42,6 +42,7 @@ namespace ApiEmpresas.Infra.Data.Repositories
         public List<Funcionario> Consultar()
         {
             return _context.Funcionario
+                .Include(f => f.Empresa) //INNER JOIN
                 .OrderBy(f => f.Nome)
                 .ToList();
         }
@@ -49,12 +50,14 @@ namespace ApiEmpresas.Infra.Data.Repositories
         public Funcionario ObterPorId(Guid id)
         {
             return _context.Funcionario
+                .Include(f => f.Empresa) //INNER JOIN
                 .FirstOrDefault(f => f.IdFuncionario.Equals(id));
         }
 
         public Funcionario ObterPorCpf(string cpf)
         {
             return _context.Funcionario
+                .Include(f => f.Empresa) //INNER JOIN
                 .FirstOrDefault(f => f.Cpf.Equals(cpf));
         }
 
@@ -62,12 +65,14 @@ namespace ApiEmpresas.Infra.Data.Repositories
         public Funcionario ObterPorMatricula(string matricula)
         {
             return _context.Funcionario
+                .Include(f => f.Empresa) //INNER JOIN
                 .FirstOrDefault(f => f.Matricula.Equals(matricula));
         }
 
         public List<Funcionario> ObterPorNome(string nome)
         {
             return _context.Funcionario
+                .Include(f => f.Empresa) //INNER JOIN
                 .Where(f => f.Nome.Contains(nome))
                 .OrderBy(f => f.Nome)
                 .ToList();
