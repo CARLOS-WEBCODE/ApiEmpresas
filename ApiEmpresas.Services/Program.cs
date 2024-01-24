@@ -11,6 +11,9 @@ SwaggerConfiguration.AddSwagger(builder);
 //Adicionando a configuração do EntityFramework
 EntityFrameworkConfiguration.AddEntityFramework(builder);
 
+//Adicionando a configuração do AutoMapper
+AutoMapperConfiguration.AddAutoMapper(builder);
+
 // Add services to the container.
 var app = builder.Build();
 
