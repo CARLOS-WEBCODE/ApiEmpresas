@@ -1,6 +1,17 @@
-﻿namespace ApiEmpresas.Services.Mappings
+﻿using ApiEmpresas.Infra.Data.Entities;
+using ApiEmpresas.Services.Responses;
+using AutoMapper;
+
+namespace ApiEmpresas.Services.Mappings
 {
-    public class EntityToResponseMap
+    /// <summary>
+    /// Mapeamento de objetos ENTITY para RESPONSE (OUTPUT da Api)
+    /// </summary>
+    public class EntityToResponseMap : Profile
     {
+        public EntityToResponseMap()
+        {
+            CreateMap<Empresa, EmpresaResponse>();
+        }
     }
 }
