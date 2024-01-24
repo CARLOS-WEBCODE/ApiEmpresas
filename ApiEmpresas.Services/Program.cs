@@ -14,6 +14,9 @@ EntityFrameworkConfiguration.AddEntityFramework(builder);
 //Adicionando a configuração do AutoMapper
 AutoMapperConfiguration.AddAutoMapper(builder);
 
+//Adicionando a configuração do JWT
+JwtConfiguration.AddJwt(builder);
+
 // Add services to the container.
 var app = builder.Build();
 
