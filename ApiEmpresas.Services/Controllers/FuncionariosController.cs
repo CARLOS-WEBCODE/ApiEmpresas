@@ -113,5 +113,45 @@ namespace ApiEmpresas.Services.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            try
+            {
+                var funcionarios = _unitOfWork.FuncionarioRepository.Consultar();
+                var lista = _mapper.Map<List<FuncionarioResponse>>(funcionarios);
+
+                if (lista.Count > 0)
+                    return StatusCode(200, lista);
+                else
+                    return StatusCode(204);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpGet("{idFuncionario}")]
+        public IActionResult GetById(Guid idFuncionario)
+        {
+            try
+            {
+                var funcionario = _unitOfWork.FuncionarioRepository.ObterPorId(idFuncionario);
+
+                if (funcionario != null)
+                {
+                    var response = _mapper.Map<FuncionarioResponse>(funcionario);
+                    return StatusCode(200, response);
+                }
+                else
+                    return StatusCode(204);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
     }
 }
