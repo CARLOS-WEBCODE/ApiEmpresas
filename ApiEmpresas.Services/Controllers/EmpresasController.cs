@@ -2,6 +2,7 @@
 using ApiEmpresas.Infra.Data.Interfaces;
 using ApiEmpresas.Services.Requests;
 using ApiEmpresas.Services.Responses;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Win32;
@@ -15,10 +16,13 @@ namespace ApiEmpresas.Services.Controllers
 
         //atributo
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+
         //construtor para injeção de dependência
-        public EmpresasController(IUnitOfWork unitOfWork)
+        public EmpresasController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         [HttpPost]
