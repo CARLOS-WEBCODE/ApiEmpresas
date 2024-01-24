@@ -3,12 +3,14 @@ using ApiEmpresas.Infra.Data.Interfaces;
 using ApiEmpresas.Services.Requests;
 using ApiEmpresas.Services.Responses;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.CompilerServices;
 
 namespace ApiEmpresas.Services.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class FuncionariosController : ControllerBase
