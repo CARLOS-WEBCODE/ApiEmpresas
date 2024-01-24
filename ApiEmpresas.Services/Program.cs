@@ -23,6 +23,9 @@ var app = builder.Build();
 // Habilitar as rotas e endpoints da API
 app.UseRouting();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 //Configurando o descritor da API
 app.UseSwagger();
 app.UseSwaggerUI(s =>
