@@ -1,4 +1,5 @@
 ﻿using ApiEmpresas.Infra.Data.Entities;
+using ApiEmpresas.Services.Requests;
 using ApiEmpresas.Services.Responses;
 using AutoMapper;
 
@@ -12,6 +13,7 @@ namespace ApiEmpresas.Services.Mappings
         public EntityToResponseMap()
         {
             CreateMap<Empresa, EmpresaResponse>();
+            CreateMap<Funcionario, FuncionarioResponse>();
         }
     }
 }

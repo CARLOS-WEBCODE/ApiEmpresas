@@ -13,6 +13,9 @@ namespace ApiEmpresas.Services.Mappings
         {
             CreateMap<EmpresaPostRequest, Empresa>();
             CreateMap<EmpresaPutRequest, Empresa>();
+
+            CreateMap<FuncionarioPostRequest, Funcionario>();
+            CreateMap<FuncionarioPutRequest, Funcionario>();
         }
     }
 }
