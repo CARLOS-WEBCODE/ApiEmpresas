@@ -1,6 +1,7 @@
 ﻿using ApiEmpresas.Infra.Data.Contexts;
 using ApiEmpresas.Infra.Data.Entities;
 using ApiEmpresas.Infra.Data.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,37 +23,40 @@ namespace ApiEmpresas.Infra.Data.Repositories
 
         public void Inserir(Usuario entity)
         {
-            throw new NotImplementedException();
+            _context.Entry(entity).State = EntityState.Added;
+            _context.SaveChanges();
         }
 
         public void Alterar(Usuario entity)
         {
-            throw new NotImplementedException();
+            _context.Entry(entity).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
         public void Excluir(Usuario entity)
         {
-            throw new NotImplementedException();
+            _context.Entry(entity).State = EntityState.Deleted;
+            _context.SaveChanges();
         }
 
         public List<Usuario> Consultar()
         {
-            throw new NotImplementedException();
+            return _context.Usuario.ToList();
         }
 
         public Usuario ObterPorId(Guid id)
         {
-            throw new NotImplementedException();
+            return _context.Usuario.FirstOrDefault(u => u.IdUsuario == id);
         }
 
         public Usuario Obter(string email)
         {
-            throw new NotImplementedException();
+            return _context.Usuario.FirstOrDefault(u => u.Email.Equals(email));
         }
 
         public Usuario Obter(string email, string senha)
         {
-            throw new NotImplementedException();
+            return _context.Usuario.FirstOrDefault(u => u.Email.Equals(email) && u.Senha.Equals(senha));
         }
 
     }
