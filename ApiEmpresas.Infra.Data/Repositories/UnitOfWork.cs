@@ -44,5 +44,8 @@ namespace ApiEmpresas.Infra.Data.Repositories
 
         public IFuncionarioRepository FuncionarioRepository 
             => new FuncionarioRepository(_context);
+
+        public IUsuarioRepository UsuarioRepository
+            => new UsuarioRepository(_context);
     }
 }

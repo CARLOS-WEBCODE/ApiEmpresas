@@ -23,6 +23,7 @@ namespace ApiEmpresas.Infra.Data.Interfaces
 
         public IEmpresaRepository EmpresaRepository { get; }
         public IFuncionarioRepository FuncionarioRepository { get; }
+        public IUsuarioRepository UsuarioRepository { get; }
 
         #endregion
     }
