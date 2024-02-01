@@ -55,8 +55,7 @@ namespace ApiEmpresas.Infra.Data.Repositories
 
         public Empresa ObterPorCnpj(string cnpj)
         {
-            return _context.Empresa
-                .FirstOrDefault(e => e.Cnpj.Equals(cnpj));
+            return _context.Empresa.FirstOrDefault(e => e.Cnpj.Equals(cnpj));
         }
 
     }
