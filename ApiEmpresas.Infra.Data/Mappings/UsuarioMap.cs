@@ -42,8 +42,7 @@ namespace ApiEmpresas.Infra.Data.Mappings
 
             #region Mapeamento de campos únicos
 
-            builder.HasIndex(f => f.Email)
-                .IsUnique();
+            builder.HasIndex(f => f.Email).IsUnique();
 
             #endregion
         }
