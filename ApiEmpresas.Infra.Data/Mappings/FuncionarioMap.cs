@@ -61,11 +61,9 @@ namespace ApiEmpresas.Infra.Data.Mappings
 
             #region Mapeamento de campos únicos
 
-            builder.HasIndex(f => f.Cpf)
-                .IsUnique();
+            builder.HasIndex(f => f.Cpf).IsUnique();
 
-            builder.HasIndex(f => f.Matricula)
-                .IsUnique();
+            builder.HasIndex(f => f.Matricula).IsUnique();
 
             #endregion
         }
