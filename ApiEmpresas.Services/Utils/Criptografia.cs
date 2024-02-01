@@ -5,6 +5,7 @@ namespace ApiEmpresas.Services.Utils
 {
     public class Criptografia
     {
+        //Criptografia utilizando MD5
         public static string GetMD5(string valor)
         {
             var md5 = new MD5CryptoServiceProvider();
