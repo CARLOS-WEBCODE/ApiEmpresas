@@ -38,6 +38,8 @@ app.UseSwaggerUI(s =>
     s.SwaggerEndpoint("/swagger/v1/swagger.json", "ProjetoAPI");
 });
 
+app.UseCors("DefaultPolicy");
+
 //Executar os serviços
 app.UseEndpoints(endpoints =>
 {
