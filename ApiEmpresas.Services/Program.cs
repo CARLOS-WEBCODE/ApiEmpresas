@@ -17,6 +17,11 @@ AutoMapperConfiguration.AddAutoMapper(builder);
 //Adicionando a configuração do JWT
 JwtConfiguration.AddJwt(builder);
 
+builder.Services.AddCors(s => s.AddPolicy("DefaultPolicy" , builder =>
+{
+    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+}));
+
 // Add services to the container.
 var app = builder.Build();
 
