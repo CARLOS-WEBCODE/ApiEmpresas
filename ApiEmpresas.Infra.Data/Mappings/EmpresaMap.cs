@@ -44,8 +44,7 @@ namespace ApiEmpresas.Infra.Data.Mappings
 
             #region
 
-            builder.HasIndex(e => e.Cnpj)
-                .IsUnique();
+            builder.HasIndex(e => e.Cnpj).IsUnique();
 
             #endregion
 
