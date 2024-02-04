@@ -10,6 +10,7 @@ namespace ApiEmpresas.Services.Mappings
     /// </summary>
     public class EntityToResponseMap : Profile
     {
+        //public EntityToResponseMap
         public EntityToResponseMap()
         {
             CreateMap<Empresa, EmpresaResponse>();
