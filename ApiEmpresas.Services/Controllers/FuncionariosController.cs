@@ -24,6 +24,7 @@ namespace ApiEmpresas.Services.Controllers
             _mapper = mapper;
         }
 
+        //HttpPost
         [HttpPost]
         public IActionResult Post(FuncionarioPostRequest request)
         {
@@ -55,6 +56,7 @@ namespace ApiEmpresas.Services.Controllers
             }
         }
 
+        //HttpPut
         [HttpPut]
         public IActionResult Put(FuncionarioPutRequest request)
         {
@@ -91,6 +93,7 @@ namespace ApiEmpresas.Services.Controllers
             }
         }
 
+        //HttpDelete
         [HttpDelete("{idFuncionario}")]
         public IActionResult Delete(Guid idFuncionario)
         {
@@ -115,6 +118,7 @@ namespace ApiEmpresas.Services.Controllers
             }
         }
 
+        //HttpGet
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -134,6 +138,7 @@ namespace ApiEmpresas.Services.Controllers
             }
         }
 
+        //HttpGet
         [HttpGet("{idFuncionario}")]
         public IActionResult GetById(Guid idFuncionario)
         {
