@@ -15,7 +15,7 @@ namespace ApiEmpresas.Infra.Data.Repositories
         //atributo
         private readonly SqlServerContext _context;
 
-        //construtor para injeção de dependência
+        //construtor para injeção de depend.
         public FuncionarioRepository(SqlServerContext context)
         {
             _context = context;
