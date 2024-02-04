@@ -12,7 +12,6 @@ namespace ApiEmpresas.Infra.Data.Repositories
 {
     public class EmpresaRepository : IEmpresaRepository
     {
-
         //atributo
         private readonly SqlServerContext _context;
 
