@@ -11,6 +11,7 @@ namespace ApiEmpresas.Services.Configurations
         /// </summary>
         public static void AddSwagger(WebApplicationBuilder builder)
         {
+            //AddSwaggerGen
             builder.Services.AddSwaggerGen(s =>
             {
                 s.SwaggerDoc("v1", new OpenApiInfo
