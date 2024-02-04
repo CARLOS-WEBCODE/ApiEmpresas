@@ -16,12 +16,11 @@ namespace ApiEmpresas.Services.Controllers
 
     public class EmpresasController : ControllerBase
     {
-
         //atributo
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        //construtor para injeção de dependência
+        //construtor para injeção de depend.
         public EmpresasController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
