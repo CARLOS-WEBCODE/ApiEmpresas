@@ -14,7 +14,7 @@ namespace ApiEmpresas.Services.Configurations
         {
             var settings = builder.Configuration.GetSection("JwtSettings");
             builder.Services.Configure<JwtSettings>(settings);
-
+            //appSettings
             var appSettings = settings.Get<JwtSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.SecretKey);
 
@@ -41,7 +41,7 @@ namespace ApiEmpresas.Services.Configurations
                         ValidateAudience = false
                     };
                 });
-
+            //AddTransient
             builder.Services.AddTransient
                 (map => new JwtService(appSettings));
         }
