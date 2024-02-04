@@ -22,6 +22,7 @@ namespace ApiEmpresas.Services.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        //HttpPost
         [HttpPost]
         public IActionResult Post(LoginPostRequest request)
         {
