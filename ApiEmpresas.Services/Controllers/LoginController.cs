@@ -15,7 +15,7 @@ namespace ApiEmpresas.Services.Controllers
         private readonly JwtService _jwtService;
         private readonly IUnitOfWork _unitOfWork;
 
-        //Construtor para injeção de dependência
+        //Construtor para injeção de depend.
         public LoginController(JwtService jwtService, IUnitOfWork unitOfWork)
         {
             _jwtService = jwtService;
