@@ -10,6 +10,7 @@
         /// </summary>
         public static void AddAutoMapper(WebApplicationBuilder builder)
         {
+            //AddAutoMapper
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
     }
