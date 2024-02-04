@@ -12,7 +12,7 @@ namespace ApiEmpresas.Infra.Data.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        //atributo
+        //atrib.
         private readonly SqlServerContext _context;
 
         //construtor para injeção de dependências (inicialização)

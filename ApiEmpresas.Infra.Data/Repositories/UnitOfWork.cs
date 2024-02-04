@@ -18,7 +18,7 @@ namespace ApiEmpresas.Infra.Data.Repositories
         private readonly SqlServerContext _context;
         private IDbContextTransaction _transaction;
 
-        //construtor para injeção de dependência
+        //construtor para injeção de depend.
         public UnitOfWork(SqlServerContext context)
         {
             _context = context;
