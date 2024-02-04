@@ -16,7 +16,7 @@ namespace ApiEmpresas.Services.Authorization
         {
             _jwtSettings = jwtSettings;
         }
-
+        //GenerateToken
         public string GenerateToken(string userName)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -29,7 +29,7 @@ namespace ApiEmpresas.Services.Authorization
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)
             };
-
+            //token
             var token = tokenHandler.CreateToken(tokenDescritor);
             return tokenHandler.WriteToken(token);
         }
