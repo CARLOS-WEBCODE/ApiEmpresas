@@ -12,9 +12,10 @@ namespace ApiEmpresas.Services.Mappings
         //public RequestToEntityMap
         public RequestToEntityMap()
         {
+            //CreateMap
             CreateMap<EmpresaPostRequest, Empresa>();
             CreateMap<EmpresaPutRequest, Empresa>();
-
+            //CreateMap
             CreateMap<FuncionarioPostRequest, Funcionario>();
             CreateMap<FuncionarioPutRequest, Funcionario>();
         }
