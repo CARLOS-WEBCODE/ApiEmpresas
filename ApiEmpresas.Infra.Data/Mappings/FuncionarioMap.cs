@@ -25,27 +25,27 @@ namespace ApiEmpresas.Infra.Data.Mappings
             builder.Property(f => f.IdFuncionario)
                 .HasColumnName("IDFUNCIONARIO")
                 .IsRequired();
-
+            //mapeamento dos campos da entidade
             builder.Property(f => f.Nome)
                 .HasColumnName("NOME")
                 .HasMaxLength(150)
                 .IsRequired();
-
+            //mapeamento dos campos da entidade
             builder.Property(f => f.Cpf)
                 .HasColumnName("CPF")
                 .HasMaxLength(14)
                 .IsRequired();
-
+            //mapeamento dos campos da entidade
             builder.Property(f => f.Matricula)
                 .HasColumnName("MATRICULA")
                 .HasMaxLength(10)
                 .IsRequired();
-
+            //mapeamento dos campos da entidade
             builder.Property(f => f.DataAdmissao)
                 .HasColumnName("DATAADMISSAO")
                 .HasColumnType("date")
                 .IsRequired();
-
+            //mapeamento dos campos da entidade
             builder.Property(f => f.IdEmpresa)
                 .HasColumnName("IDEMPRESA")
                 .IsRequired();
