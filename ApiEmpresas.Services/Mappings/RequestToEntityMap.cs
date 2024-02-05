@@ -9,6 +9,7 @@ namespace ApiEmpresas.Services.Mappings
     /// </summary>
     public class RequestToEntityMap : Profile
     {
+        //public RequestToEntityMap
         public RequestToEntityMap()
         {
             CreateMap<EmpresaPostRequest, Empresa>();
